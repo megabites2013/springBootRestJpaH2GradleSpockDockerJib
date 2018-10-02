@@ -1,6 +1,7 @@
 # springBootRestJpaH2GradleSpockDockerJib
 A demo springBoot Rest application with Jpa H2 Gradle Spock Geb Docker Jib and groovy, etc
 
+
 == Requirement is as blow:
 
 
@@ -26,18 +27,19 @@ http://www.freemaptools.com/download/full-postcodes/postcodes.zip;
 http://www.freemaptools.com/download/full-postcodes/fullukpostcodes.zip.
 
 
+
 == how to verify
 
 
 test & build:
-
+```
 ./gradlew build
-
+```
 
 run it:
-
+```
 ./gradlew bootRun
-
+```
 
 http://localhost:8080   is a simple CURD based on the rest
 http://localhost:8080/swagger-ui.html  is swagger2, where you can test api 
