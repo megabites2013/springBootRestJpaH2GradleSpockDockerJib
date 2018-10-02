@@ -1,7 +1,7 @@
 # springBootRestJpaH2GradleSpockDockerJib
 A demo springBoot Rest application with Jpa H2 Gradle Spock Geb Docker Jib and groovy, etc
 
-Requirement is as blow:
+== Requirement is as blow:
 
 
 Write a REST service that will return the geographic (straight line) distance between two postal codes in the UK.
@@ -25,9 +25,9 @@ http://www.freemaptools.com/download/full-postcodes/postcodes.zip;
 
 http://www.freemaptools.com/download/full-postcodes/fullukpostcodes.zip.
 
-...
-how to verify
-...
+
+== how to verify
+
 
 test & build:
 
