@@ -1,28 +1,21 @@
 package com.efiab.springdockerjib
 
+import com.efiab.springdockerjib.model.PostCode
 import com.efiab.springdockerjib.utils.DistanceCalc
 import groovyx.net.http.RESTClient
-import net.sf.json.JSON
 import org.apache.logging.log4j.LogManager
-import org.apache.logging.log4j.Logger
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.context.ConfigurableApplicationContext
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.client.RestTemplate
-import spock.lang.AutoCleanup
-import spock.lang.Shared
-import spock.lang.Specification
-import spock.lang.Stepwise
-import spock.lang.Unroll
+import spock.lang.*
 
 import java.util.concurrent.Callable
 import java.util.concurrent.Executors
 import java.util.concurrent.Future
 import java.util.concurrent.TimeUnit
-
-import com.efiab.springdockerjib.model.PostCode
 
 @Stepwise
 @SpringBootTest

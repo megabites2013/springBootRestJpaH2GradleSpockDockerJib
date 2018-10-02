@@ -11,82 +11,82 @@ import javax.persistence.Id;
 @Entity
 public class PostCode {
 
-    @Id
-    @GeneratedValue
-    @Column(name = "id")
-    private Integer id;
-    @CsvBindByName
-    @Column(name = "postcode")
-    private String postcode;
-    @CsvBindByName
-    @Column(name = "latitude")
-    private double latitude;
-    @CsvBindByName
-    @Column(name = "longitude")
-    private double longitude;
+  @Id
+  @GeneratedValue
+  @Column(name = "id")
+  private Integer id;
 
-    public PostCode() {
-    }
+  @CsvBindByName
+  @Column(name = "postcode")
+  private String postcode;
 
-    public PostCode(Integer id,String postcode, double latitude, double longitude) {
-        this.id = id;
-        this.postcode = postcode;
-        this.latitude = latitude;
-        this.longitude = longitude;
-    }
+  @CsvBindByName
+  @Column(name = "latitude")
+  private double latitude;
 
-    public Integer getId() {
-        return id;
-    }
+  @CsvBindByName
+  @Column(name = "longitude")
+  private double longitude;
 
-    public void setId(Integer _id) {
-        this.id = _id;
-    }
+  public PostCode() {}
 
-    public String getPostcode() {
-        return postcode;
-    }
+  public PostCode(Integer id, String postcode, double latitude, double longitude) {
+    this.id = id;
+    this.postcode = postcode;
+    this.latitude = latitude;
+    this.longitude = longitude;
+  }
 
-    public void setPostcode(String postcode) {
-        this.postcode = postcode;
-    }
+  public Integer getId() {
+    return id;
+  }
 
-    public double getLatitude() {
-        return latitude;
-    }
+  public void setId(Integer _id) {
+    this.id = _id;
+  }
 
-    public void setLatitude(double latitude) {
-        this.latitude = latitude;
-    }
+  public String getPostcode() {
+    return postcode;
+  }
 
-    public double getLongitude() {
-        return longitude;
-    }
+  public void setPostcode(String postcode) {
+    this.postcode = postcode;
+  }
 
-    public void setLongitude(double longitude) {
-        this.longitude = longitude;
-    }
+  public double getLatitude() {
+    return latitude;
+  }
 
+  public void setLatitude(double latitude) {
+    this.latitude = latitude;
+  }
 
-    /**
-     * To json obj json object.
-     *
-     * @return the json object
-     */
-    public JsonObject toJsonObj() {
-        JsonObject json =
-                new JsonObject()
-                        .put("postcode", postcode)
-                        .put("latitude", latitude)
-                        .put("longitude", longitude)
-                        .put("id", id);
+  public double getLongitude() {
+    return longitude;
+  }
 
-        return json;
-    }
+  public void setLongitude(double longitude) {
+    this.longitude = longitude;
+  }
 
+  /**
+   * To json obj json object.
+   *
+   * @return the json object
+   */
+  public JsonObject toJsonObj() {
+    JsonObject json =
+        new JsonObject()
+            .put("postcode", postcode)
+            .put("latitude", latitude)
+            .put("longitude", longitude)
+            .put("id", id);
 
-    @Override
-    public String toString() {
-        return "" +id+ ", " + postcode + ", " + latitude + ", " + longitude;
-    }
+    return json;
+  }
+
+  @Override
+  public String toString() {
+    return "" + id + ", " + postcode + ", " + latitude + ", " + longitude;
+  }
 }

@@ -8,7 +8,6 @@ import com.opencsv.bean.CsvToBeanBuilder;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
-import io.vertx.core.json.Json;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,9 +24,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
-import static com.efiab.springdockerjib.utils.Constants.FILE_POSTCODE_OUTCODES_CSV;
-import static com.efiab.springdockerjib.utils.Constants.MAGIC_TWO;
-import static com.efiab.springdockerjib.utils.Constants.UKPCODE;
+import static com.efiab.springdockerjib.utils.Constants.*;
 
 @Api(description = "UK PostCode Management API")
 @RestController

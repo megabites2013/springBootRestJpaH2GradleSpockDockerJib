@@ -53,25 +53,25 @@
     });
 
     function create(postcode, latitude, longitude) {
-/*        $.post("/api/postcodes/save", JSON.stringify({
-            postcode: postcode,
-            latitude: parseFloat(latitude),
-            longitude: parseFloat(longitude)
-        }), function () {
-            load();
-        }, "json");*/
+        /*        $.post("/api/postcodes/save", JSON.stringify({
+                    postcode: postcode,
+                    latitude: parseFloat(latitude),
+                    longitude: parseFloat(longitude)
+                }), function () {
+                    load();
+                }, "json");*/
 
         $.ajax({
-            url:"/api/postcodes/save",
-            type:"POST",
-            data:JSON.stringify({
+            url: "/api/postcodes/save",
+            type: "POST",
+            data: JSON.stringify({
                 postcode: postcode,
                 latitude: parseFloat(latitude),//parseInt($('#numberValue').val()
                 longitude: parseFloat(longitude)
             }),
-            contentType:"application/json; charset=utf-8",
-            dataType:"json",
-            success: function(){
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function () {
                 load();
             }
         });
@@ -90,7 +90,7 @@
         $.ajax({
             method: "PUT",
             url: "/api/postcodes/" + id,
-            contentType:"application/json; charset=utf-8",
+            contentType: "application/json; charset=utf-8",
             data: JSON.stringify({postcode: postcode, latitude: parseFloat(latitude), longitude: parseFloat(longitude)})
         }).done(function () {
             load();

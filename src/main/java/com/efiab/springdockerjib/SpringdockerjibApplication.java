@@ -16,30 +16,27 @@ import static com.efiab.springdockerjib.utils.Constants.UKPCODE;
 @EnableJpaRepositories(basePackages = "com.efiab.springdockerjib.repository")
 @SpringBootApplication
 @EnableAsync
-
 public class SpringdockerjibApplication {
 
-	public static void main(String[] args) {
-		final Logger LOGGER = LogManager.getLogger(UKPCODE);
-		SpringApplication.run(SpringdockerjibApplication.class, args);
-		LOGGER.info("SpringdockerjibApplication started ... ...");
+  public static void main(String[] args) {
+    final Logger LOGGER = LogManager.getLogger(UKPCODE);
+    SpringApplication.run(SpringdockerjibApplication.class, args);
+    LOGGER.info("SpringdockerjibApplication started ... ...");
+  }
 
-	}
-
-	/**
-	 * By defalut SimpleAsyncTaskExecutor is used by SpringBoot when use @EnableAsync
-	 * @return Executor
-	 */
-	@Bean
-	public Executor asyncExecutor() {
-		ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-		executor.setCorePoolSize(2);
-		executor.setMaxPoolSize(4);
-		executor.setQueueCapacity(500);
-		executor.setThreadNamePrefix("LongRunThread-");
-		executor.initialize();
-		return executor;
-	}
-
-
+  /**
+   * By defalut SimpleAsyncTaskExecutor is used by SpringBoot when use @EnableAsync
+   *
+   * @return Executor
+   */
+  @Bean
+  public Executor asyncExecutor() {
+    ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+    executor.setCorePoolSize(2);
+    executor.setMaxPoolSize(4);
+    executor.setQueueCapacity(500);
+    executor.setThreadNamePrefix("LongRunThread-");
+    executor.initialize();
+    return executor;
+  }
 }
