@@ -25,3 +25,21 @@ http://www.freemaptools.com/download/full-postcodes/postcodes.zip;
 
 http://www.freemaptools.com/download/full-postcodes/fullukpostcodes.zip.
 
+...
+how to verify
+...
+
+test & build:
+
+./gradlew build
+
+
+run it:
+
+./gradlew bootRun
+
+
+http://localhost:8080   is a simple CURD based on the rest
+http://localhost:8080/swagger-ui.html  is swagger2, where you can test api 
+http://localhost:8080/console   is H2 mem DB console, jdbc url should be: jdbc:h2:mem:postcodes
+
