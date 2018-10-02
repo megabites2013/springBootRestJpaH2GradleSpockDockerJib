@@ -1,5 +1,8 @@
+
 # springBootRestJpaH2GradleSpockDockerJib
-A demo springBoot Rest application with Jpa H2 Gradle Spock Geb Docker Jib and groovy, etc
+
+
+== A demo springBoot Rest application with Jpa H2 Gradle Spock Geb Docker Jib and groovy, etc
 
 
 == Requirement is as blow:
@@ -43,10 +46,10 @@ run it:
 
 ```
 http://localhost:8080   is a simple CURD based on the rest
-```
-```
+
+
 http://localhost:8080/swagger-ui.html  is swagger2, where you can test api 
-```
-```
+
+
 http://localhost:8080/console   is H2 mem DB console, jdbc url should be: jdbc:h2:mem:postcodes
 ```
