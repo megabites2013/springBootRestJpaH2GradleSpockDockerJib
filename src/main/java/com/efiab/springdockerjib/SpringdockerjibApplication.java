@@ -19,9 +19,9 @@ import static com.efiab.springdockerjib.utils.Constants.UKPCODE;
 public class SpringdockerjibApplication {
 
   public static void main(String[] args) {
-    final Logger LOGGER = LogManager.getLogger(UKPCODE);
+    final Logger logger = LogManager.getLogger(UKPCODE);
     SpringApplication.run(SpringdockerjibApplication.class, args);
-    LOGGER.info("SpringdockerjibApplication started ... ...");
+    logger.info("SpringdockerjibApplication started ... ...");
   }
 
   /**

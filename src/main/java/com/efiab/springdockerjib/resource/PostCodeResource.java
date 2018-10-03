@@ -26,7 +26,7 @@ import java.util.concurrent.CompletableFuture;
 
 import static com.efiab.springdockerjib.utils.Constants.*;
 
-@Api(description = "UK PostCode Management API")
+@Api
 @RestController
 @RequestMapping(value = "/api/postcodes")
 public class PostCodeResource {
@@ -40,7 +40,7 @@ public class PostCodeResource {
   @GetMapping(value = "/all")
   public List<PostCode> getAll() {
     List<PostCode> all = postCodeRepository.findAll();
-    if (all.size() == 0) {
+    if (all.isEmpty()) {
       initDB();
       return postCodeRepository.findAll();
     }
@@ -67,8 +67,7 @@ public class PostCodeResource {
       dataType = "PostCode")
   @PostMapping(value = "/save", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
   public PostCode persist(@RequestBody final PostCode postCode) {
-    PostCode save = postCodeRepository.save(postCode);
-    return save;
+    return postCodeRepository.save(postCode);
   }
 
   @ApiOperation(value = "Update One PostCode", notes = "update one PostCode")
@@ -81,8 +80,7 @@ public class PostCodeResource {
   public PostCode update(@PathVariable Integer postCodeId, @RequestBody final PostCode postCode) {
     LOGGER.debug("PostCodeResource - updateOne: id = " + postCodeId);
     postCode.setId(postCodeId);
-    PostCode save = postCodeRepository.save(postCode);
-    return save;
+    return postCodeRepository.save(postCode);
   }
 
   @ApiOperation(value = "Find One PostCode by id", notes = "find one PostCode by id")

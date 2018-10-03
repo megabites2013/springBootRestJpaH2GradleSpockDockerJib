@@ -15,7 +15,7 @@ public class PostCodeDistance {
   private PostCode postCode1;
   private PostCode postCode2;
   private double distance;
-  private final String unit = "km";
+  private static final String unit = "km";
 
   /**
    * Instantiates a new Post code distence.
@@ -102,13 +102,10 @@ public class PostCodeDistance {
    * @return the json object
    */
   public JsonObject toJsonObj() {
-    JsonObject json =
-        new JsonObject()
-            .put("postCode1", postCode1.toJsonObj())
-            .put("postCode2", postCode2.toJsonObj())
-            .put("distance", distance)
-            .put("unit", "km");
-
-    return json;
+    return new JsonObject()
+        .put("postCode1", postCode1.toJsonObj())
+        .put("postCode2", postCode2.toJsonObj())
+        .put("distance", distance)
+        .put("unit", unit);
   }
 }

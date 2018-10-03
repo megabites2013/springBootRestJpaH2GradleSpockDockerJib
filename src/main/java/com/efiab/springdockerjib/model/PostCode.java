@@ -41,8 +41,8 @@ public class PostCode {
     return id;
   }
 
-  public void setId(Integer _id) {
-    this.id = _id;
+  public void setId(Integer id) {
+    this.id = id;
   }
 
   public String getPostcode() {
@@ -75,14 +75,11 @@ public class PostCode {
    * @return the json object
    */
   public JsonObject toJsonObj() {
-    JsonObject json =
-        new JsonObject()
-            .put("postcode", postcode)
-            .put("latitude", latitude)
-            .put("longitude", longitude)
-            .put("id", id);
-
-    return json;
+    return new JsonObject()
+        .put("postcode", postcode)
+        .put("latitude", latitude)
+        .put("longitude", longitude)
+        .put("id", id);
   }
 
   @Override
