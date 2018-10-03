@@ -55,6 +55,10 @@ class SpringdockerjibApplicationTests extends Specification {
         plist << new PostCode(4, 'AB13', 57.10801, -2.23776);
         plist << new PostCode(5, 'AB14', 57.10076, -2.27073);
         plist << new PostCode(6, 'AB15', 57.13868, -2.16525);
+        plist << new PostCode(7, 'AB16', 57.16115, -2.15543);
+        plist << new PostCode(8, 'AB21', 57.20960, -2.20033);
+        plist << new PostCode(9, 'AB22', 57.18724, -2.11913);
+        plist << new PostCode(10, 'AB23', 57.21242, -2.08776);
     }
 
 
@@ -208,19 +212,23 @@ class SpringdockerjibApplicationTests extends Specification {
 
     /**
      * some test data
-     *
+     * pList:
      * 1,AB10,57.13514,-2.11731
      2,AB11,57.13875,-2.09089
      3,AB12,57.10100,-2.11060
      4,AB13,57.10801,-2.23776
      5,AB14,57.10076,-2.27073
      6,AB15,57.13868,-2.16525
+     8,AB16,57.16115,-2.15543
+     9,AB21,57.20960,-2.20033
+     10,AB22,57.18724,-2.11913
+     11,AB23,57.21242,-2.08776
      * @return
      */
     @Unroll
-    def "calculate #distance between 2 postcode #pid1_pid2 with this rest"() {
+    def "calculate #distance between 2 postcode #pid1 #pid2 with this rest"() {
         when: "take 2 postcodes, sent request to calculate distance between them"
-        def resp = client.get(path: "/api/postcodes/calc" + pid1_pid2,
+        def resp = client.get(path: "/api/postcodes/calc/" + pid1 + "/" + pid2,
                 requestContentType: "application/json"
         )
 
@@ -240,10 +248,12 @@ class SpringdockerjibApplicationTests extends Specification {
 
         where:
 
-        pid1_pid2 || distance
-        "/1/2"    || DistanceCalc.calculateDistance(plist[0], plist[1]).distance
-        "/3/4"    || DistanceCalc.calculateDistance(plist[2], plist[3]).distance
-        "/5/6"    || DistanceCalc.calculateDistance(plist[4], plist[5]).distance
+        pid1 || pid2 || distance
+        1    || 2    || DistanceCalc.calculateDistance(plist[0], plist[1]).distance
+        3    || 4    || DistanceCalc.calculateDistance(plist[2], plist[3]).distance
+        5    || 6    || DistanceCalc.calculateDistance(plist[4], plist[5]).distance
+        7    || 8    || DistanceCalc.calculateDistance(plist[6], plist[7]).distance
+        9    || 10    || DistanceCalc.calculateDistance(plist[8], plist[9]).distance
 
     }
 
