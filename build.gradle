@@ -65,7 +65,7 @@ jib {
         image = 'registry.hub.docker.com/openjdk:8-jdk-alpine'
         auth {
             username = 'megabites'
-            password = 'e234w678'
+            password = 'xxxx'
         }
     }
     to {
@@ -73,7 +73,7 @@ jib {
         image = 'registry.hub.docker.com/r/megabites/sebastianxdocker/myspringbootjib:jib'
         auth {
             username = 'megabites'
-            password = 'e234w678'
+            password = 'xxxx'
         }
         credHelper = 'osxkeychain'
     }
