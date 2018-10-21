@@ -2,6 +2,7 @@ package com.efiab.springdockerjib
 
 import com.efiab.springdockerjib.model.PostCode
 import com.efiab.springdockerjib.utils.DistanceCalc
+import groovy.json.JsonSlurper
 import groovyx.net.http.RESTClient
 import org.apache.logging.log4j.LogManager
 import org.springframework.boot.SpringApplication
@@ -17,16 +18,20 @@ import java.util.concurrent.Executors
 import java.util.concurrent.Future
 import java.util.concurrent.TimeUnit
 
+import static groovyx.net.http.ContentType.JSON
+
 @Stepwise
 @SpringBootTest
 class SpringdockerjibApplicationTests extends Specification {
 
     @Shared
-    def LOGGER = LogManager.getLogger("SPRINGDOCKERJIBAPPLICATIONTESTS");
+    def LOGGER = LogManager.getLogger("SPRINGDOCKERJIBAPPLICATIONTESTS")
     @Shared
     def testURL = "http://localhost:8080"
     @Shared
     def client = new RESTClient(testURL)
+
+    static String jwtToken
 
     static PostCode p1
     static PostCode p2
@@ -34,31 +39,31 @@ class SpringdockerjibApplicationTests extends Specification {
 
     @Shared
     @AutoCleanup
-    def ConfigurableApplicationContext context
+    ConfigurableApplicationContext context
 
     void setupSpec() {
         Future future = Executors
                 .newSingleThreadExecutor().submit(
                 new Callable() {
                     @Override
-                    public ConfigurableApplicationContext call() throws Exception {
+                    ConfigurableApplicationContext call() throws Exception {
                         return (ConfigurableApplicationContext) SpringApplication
                                 .run(SpringdockerjibApplication.class)
                     }
                 })
-        context = future.get(60, TimeUnit.SECONDS)
-        println("ConfigurableApplicationContext setup as " + context);
+        context = future.get(160, TimeUnit.SECONDS)
+        println("ConfigurableApplicationContext setup as " + context)
 
-        plist << new PostCode(1, 'AB10', 57.13514, -2.11731);
-        plist << new PostCode(2, 'AB11', 57.13875, -2.09089);
-        plist << new PostCode(3, 'AB12', 57.10100, -2.11060);
-        plist << new PostCode(4, 'AB13', 57.10801, -2.23776);
-        plist << new PostCode(5, 'AB14', 57.10076, -2.27073);
-        plist << new PostCode(6, 'AB15', 57.13868, -2.16525);
-        plist << new PostCode(7, 'AB16', 57.16115, -2.15543);
-        plist << new PostCode(8, 'AB21', 57.20960, -2.20033);
-        plist << new PostCode(9, 'AB22', 57.18724, -2.11913);
-        plist << new PostCode(10, 'AB23', 57.21242, -2.08776);
+        plist << new PostCode(6, 'AB10', 57.13514, -2.11731)
+        plist << new PostCode(7, 'AB11', 57.13875, -2.09089)
+        plist << new PostCode(8, 'AB12', 57.10100, -2.11060)
+        plist << new PostCode(9, 'AB13', 57.10801, -2.23776)
+        plist << new PostCode(10, 'AB14', 57.10076, -2.27073)
+        plist << new PostCode(11, 'AB15', 57.13868, -2.16525)
+        plist << new PostCode(12, 'AB16', 57.16115, -2.15543)
+        plist << new PostCode(13, 'AB21', 57.20960, -2.20033)
+        plist << new PostCode(14, 'AB22', 57.18724, -2.11913)
+        plist << new PostCode(15, 'AB23', 57.21242, -2.08776)
     }
 
 
@@ -67,8 +72,8 @@ class SpringdockerjibApplicationTests extends Specification {
         true
     }
 
-    def "index.html Page works"() {
-        when: "get index Page"
+    def "home Page login Page works"() {
+        when: "get home Page"
         def response = client.get(
                 path: '/'
         )
@@ -81,13 +86,36 @@ class SpringdockerjibApplicationTests extends Specification {
     def "Swagger2-ui Page shows"() {
         when: "get Swagger2 Page"
         def response = client.get(
-                path: '/'
+                path: '/swagger-ui.html'
         )
 
         then: "Status is 200"
         response.status == 200
     }
 
+    def "login JWT works"() {
+        when: "login to get JWT token"
+        def jsonObj = new JsonSlurper().parseText('{"username":"admin","password":"password"}')
+        def response = client.post(
+                path: '/login',
+                contentType: JSON,
+                body: jsonObj,
+                headers: [Accept: 'application/json']
+        )
+
+
+        assert response.status == 200
+        if (response) {
+            println("Content Type: " + response.contentType)
+            println("Headers: " + response.getAllHeaders())
+        }
+        jwtToken = response.getHeaders()["Authorization"].value
+        client.defaultRequestHeaders.'Authorization' = jwtToken
+
+        then: "data contains JWT values"
+        assert jwtToken != null && jwtToken.startsWith("Bearer")
+
+    }
 
     def "Purge then reload DB"() {
         when: "reload db"
@@ -107,7 +135,7 @@ class SpringdockerjibApplicationTests extends Specification {
 
         then:
         entity.statusCode == HttpStatus.OK
-        entity.body.contains('Just a simple CRUD page based on the RestAPI(SpringBoot)')
+        entity.body.contains('login')
     }
 
     //test with Groovy RestClient
@@ -120,6 +148,7 @@ class SpringdockerjibApplicationTests extends Specification {
 
         then: "Status is 200"
         response.status == 200
+        //println response.data[0]
 
         and: "data contains many proper values"
         assert response.data[0].id >= 1
@@ -249,11 +278,11 @@ class SpringdockerjibApplicationTests extends Specification {
         where:
 
         pid1 || pid2 || distance
-        1    || 2    || DistanceCalc.calculateDistance(plist[0], plist[1]).distance
-        3    || 4    || DistanceCalc.calculateDistance(plist[2], plist[3]).distance
-        5    || 6    || DistanceCalc.calculateDistance(plist[4], plist[5]).distance
-        7    || 8    || DistanceCalc.calculateDistance(plist[6], plist[7]).distance
-        9    || 10    || DistanceCalc.calculateDistance(plist[8], plist[9]).distance
+        6    || 7    || DistanceCalc.calculateDistance(plist[0], plist[1]).distance
+        8    || 9    || DistanceCalc.calculateDistance(plist[2], plist[3]).distance
+        10   || 11   || DistanceCalc.calculateDistance(plist[4], plist[5]).distance
+        12   || 13   || DistanceCalc.calculateDistance(plist[6], plist[7]).distance
+        14   || 15   || DistanceCalc.calculateDistance(plist[8], plist[9]).distance
 
     }
 

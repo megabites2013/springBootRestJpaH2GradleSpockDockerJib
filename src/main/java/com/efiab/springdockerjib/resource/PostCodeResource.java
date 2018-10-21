@@ -6,7 +6,6 @@ import com.efiab.springdockerjib.repository.IPostCodeRepository;
 import com.efiab.springdockerjib.utils.DistanceCalc;
 import com.opencsv.bean.CsvToBeanBuilder;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -32,7 +31,7 @@ import static com.efiab.springdockerjib.utils.Constants.*;
 public class PostCodeResource {
 
   /** The Logger. */
-  static final Logger LOGGER = LogManager.getLogger(UKPCODE);
+  private static final Logger LOGGER = LogManager.getLogger(UKPCODE);
 
   @Autowired IPostCodeRepository postCodeRepository;
 
@@ -48,11 +47,6 @@ public class PostCodeResource {
   }
 
   @ApiOperation(value = "Create Multiple PostCode", notes = "Save posted PostCodes by http Post")
-  @ApiImplicitParam(
-      name = "postCodes",
-      value = "postCodes you want to create in batch",
-      required = true,
-      dataType = "List<PostCode>")
   @PostMapping(value = "/saveall")
   public List<PostCode> persist(@RequestBody final List<PostCode> postCodes) {
     postCodeRepository.saveAll(postCodes);
@@ -60,22 +54,12 @@ public class PostCodeResource {
   }
 
   @ApiOperation(value = "Create One PostCode", notes = "save one PostCode by http post")
-  @ApiImplicitParam(
-      name = "postCode",
-      value = "a postCode to create",
-      required = true,
-      dataType = "PostCode")
   @PostMapping(value = "/save", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
   public PostCode persist(@RequestBody final PostCode postCode) {
     return postCodeRepository.save(postCode);
   }
 
   @ApiOperation(value = "Update One PostCode", notes = "update one PostCode")
-  @ApiImplicitParam(
-      name = "postCode",
-      value = "postCode to update",
-      required = true,
-      dataType = "PostCode")
   @PutMapping(value = "/{postCodeId}", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
   public PostCode update(@PathVariable Integer postCodeId, @RequestBody final PostCode postCode) {
     LOGGER.debug("PostCodeResource - updateOne: id = " + postCodeId);
@@ -84,22 +68,12 @@ public class PostCodeResource {
   }
 
   @ApiOperation(value = "Find One PostCode by id", notes = "find one PostCode by id")
-  @ApiImplicitParam(
-      name = "postCodeId",
-      value = "postCodeId",
-      required = true,
-      dataType = "Integer")
   @GetMapping("/{postCodeId}")
   public Optional<PostCode> find(@PathVariable final Integer postCodeId) {
     return postCodeRepository.findById(postCodeId);
   }
 
   @ApiOperation(value = "Delete One PostCode", notes = "delete one PostCode")
-  @ApiImplicitParam(
-      name = "postCodeId",
-      value = "postCodeId to delete",
-      required = true,
-      dataType = "Integer")
   @DeleteMapping("/{postCodeId}")
   public List<PostCode> delete(@PathVariable final Integer postCodeId) {
     postCodeRepository.deleteById(postCodeId);

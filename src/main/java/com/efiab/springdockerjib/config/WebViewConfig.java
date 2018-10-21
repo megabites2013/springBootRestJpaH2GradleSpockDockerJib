@@ -5,9 +5,15 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+/**
+ * WebViewConfig class
+ *
+ * @author Sebex
+ * @date 2018/10/20
+ */
 @Configuration
 @ComponentScan
-public class MyViewConfig implements WebMvcConfigurer {
+public class WebViewConfig implements WebMvcConfigurer {
 
   @Override
   public void addResourceHandlers(ResourceHandlerRegistry registry) {
